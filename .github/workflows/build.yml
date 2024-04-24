@@ -17,7 +17,7 @@ jobs:
           CR_PAT: ${{ secrets.CR_PAT }}
 
       - name: Build docker image
-        run: docker build -f Dockerfile -t ghcr.io/Zenika/sensei-devcontainer:latest .
+        run: docker build -f Dockerfile -t ghcr.io/zenika/sensei-devcontainer:latest .
 
       - name: Push image to GHCR
-        run: docker push ghcr.io/Zenika/sensei-devcontainer:latest
+        run: docker push ghcr.io/zenika/sensei-devcontainer:latest
