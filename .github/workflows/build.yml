@@ -1,0 +1,23 @@
+name: on-push
+
+on: [push, workflow_dispatch]
+
+jobs:
+  build:
+    name: Build & publish to GHCR
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Login to GitHub Container registry
+        run: echo $CR_PAT | docker login ghcr.io -u Remieven --password-stdin
+        env:
+          CR_PAT: ${{ secrets.CR_PAT }}
+
+      - name: Build docker image
+        run: docker build -f Dockerfile -t ghcr.io/Zenika/sensei-devcontainer:latest .
+
+      - name: Push image to GHCR
+        run: docker push ghcr.io/Zenika/sensei-devcontainer:latest
